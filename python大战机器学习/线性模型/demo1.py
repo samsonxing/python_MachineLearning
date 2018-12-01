@@ -29,3 +29,16 @@ def test_Ridge(*data):
 
 X_train,X_test,y_train,y_test = load_data()
 test_Ridge(X_train,X_test,y_train,y_test)
+
+def test_Ridge_alpha(*data):
+    X_train, X_test, y_train, y_test = data
+    alphas= [0.01,0.02,0.05,0.1,0.2,0.5,1,2,5,10,20,50,100,200,500,1000]
+    scores=[]
+    for i,alpha in enumerate(alphas):
+        regr = linear_model.Ridge(alpha=alpha)
+        regr.fit(X_train,y_train)
+        scores.append(regr.score(X_test,y_test))
+
+fig = plt.figure()
+ax=fig.add_subplot(1,1,1)
+ax.plot(alphas,scores)
